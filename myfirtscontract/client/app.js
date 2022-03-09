@@ -74,6 +74,7 @@ App = {
             from: App.account
         })
         // console.log(result.logs[0].args)
+        location.reload();
     },
     toggleDone: async (element) => {
         const taskId = element.dataset.id
