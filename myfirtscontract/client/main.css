@@ -1,4 +1,21 @@
+html {
+  background: #0a192f;
+  color: white;
+}
+
+html,
 body {
-    background: #0a192f;
-    color: white;
+  background: #0a192f;
+  color: white;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+}
+
+.form {
+  margin: auto;
 }
