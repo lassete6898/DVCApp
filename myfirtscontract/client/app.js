@@ -6,7 +6,7 @@ App = {
         await App.loadAccount()
         await App.loadContracts()
         App.render()
-        await App.renderTasks() 
+        await App.renderTasks()
     },
     loadEthereum: async () => {
         if (window.ethereum) {
@@ -21,6 +21,9 @@ App = {
     loadAccount: async () => {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
         App.account = accounts[0]
+        // var balance = await window.ethereum.request({ method: 'eth_getBalance', params: [App.account, 'latest'] })
+        // App.balance = balance
+        // console.log(balance)
     },
     loadContracts: async () => {
         const res = await fetch("TasksContract.json")                       //Traigo el contrato en formato JSON
@@ -33,6 +36,7 @@ App = {
     render: () => {
         console.log(App.account)
         document.getElementById('account').innerText = App.account
+        // document.getElementById('balance').innerHTML = App.balance
     },
     renderTasks: async () => {
         const taskCounter = await App.tasksContract.taskCounter()
