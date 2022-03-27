@@ -6,5 +6,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
 taskForm.addEventListener("submit", e => {
     e.preventDefault();
-    App.createTask(taskForm["title"].value, taskForm["description"].value);
+    
+    var startup = document.getElementById("startupsSelect").value;
+
+    if (startup == "") {
+        alert("Select a Startup")
+    } else {
+        console.log(startup);
+        console.log(taskForm["amount"].value);
+        App.createTask(startup, taskForm["amount"].value);
+        // App.createTask(taskForm["title"].value, taskForm["description"].value);
+    }
 })

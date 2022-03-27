@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/libs/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
     <link rel="stylesheet" href="./main.css">
     <title>DAPP Tasks</title>
 </head>
@@ -12,7 +13,7 @@
     <div class="container py-5">
         <div class="row">
             <div class="col-md-4">
-                <div class="card card-body rounded mb-4 bg-dark">
+                <div class="card card-body rounded mb-4 bg-dark" style="padding: 5%; border-radius: 5%; box-shadow: 10px 5px 5px black;">
                     <h1> DVCApp </h1>
                     <h6 class="text-muted"> Decentralized Venture Capital App </h6>
                     <span>
@@ -24,10 +25,23 @@
                     <span id="account"> </span>
                     <!-- <span id="balance"></span> -->
                 </div>
-                <form class="card card-body rounded bg-dark" id="taskForm">
+                <form class="card card-body rounded bg-dark" id="taskForm" style="padding: 5%; border-radius: 5%; box-shadow: 10px 5px 5px black;">
                     <h4> Make a Transaction </h4>
-                    <input type="text" name="title" placeholder="Write a Startup" class="form-control bg-dark text-white rounded-0 border-0 my-4">
-                    <textarea rows="2" name="description" class="form-control bg-dark text-white rounded-0 border-0 my-4" placeholder="Amount..."></textarea>
+
+                    <div class="form-group">
+                        <select class="form-control bg-dark text-white rounded border mt-4" id="startupsSelect">
+                            <option value="" disabled selected hidden> Select a Startup </option>
+                            <option value="Soluciones MedX"> Soluciones MedX </option>
+                            <option value="Arte Cuerdas"> Arte Cuerdas </option>
+                            <option value="Casa Platino"> Casa Platino </option>
+                            <option value="Desenfadado"> Desenfadado </option>
+                            <option value="Pequeñas Espinas"> Pequeñas Espinas </option>
+                        </select>
+                    </div>
+                    <input type="number" name="amount" placeholder="Amount ETH" class="form-control bg-dark text-white rounded border my-4" min="1000">
+
+                    <!-- <input type="text" name="title" placeholder="Write a Startup" class="form-control bg-dark text-white rounded-0 border-0 my-4">
+                    <textarea rows="2" name="description" class="form-control bg-dark text-white rounded-0 border-0 my-4" placeholder="Amount..."></textarea> -->
                     <button class="btn btn-primary"> Save </button>
                 </form>
             </div>
@@ -38,6 +52,7 @@
     </div>
 
     <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
     <script src="./libs/@truffle/contract/dist/truffle-contract.min.js"></script>
     <script src="./app.js"></script>
     <script src="./ui.js"></script>
