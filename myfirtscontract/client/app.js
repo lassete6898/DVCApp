@@ -54,7 +54,7 @@ App = {
             const taskCreated = task[4]
 
             let taskElement = `
-                <div class="card bg-dark rounded-0 mb-2">
+                <div class="card bg-dark rounded-0 mb-2" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span> ${taskTitle} </span>
                         <div class="form-check form-switch">
