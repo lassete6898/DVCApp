@@ -31,8 +31,8 @@ contract TasksContract {
 
     function createTask(string memory _title, string memory _description) public {
         taskCounter++;
-        tasks[taskCounter] = Task(taskCounter, _title, _description, false, block.timestamp);
-        emit TaskCreated(taskCounter, _title, _description, false, block.timestamp);
+        tasks[taskCounter] = Task(taskCounter, _title, _description, true, block.timestamp);
+        emit TaskCreated(taskCounter, _title, _description, true, block.timestamp);
     }
 
     function toggleDone(uint _id) public {
