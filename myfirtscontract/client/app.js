@@ -63,7 +63,7 @@ App = {
                     </div> 
                     <div class="card-body">
                         <span> ${taskDescription} ETH </span>
-                        <p class="text-muted">Task was created ${new Date(taskCreated * 1000).toLocaleString()}</p>
+                        <p class="text-muted">Transaction was created ${new Date(taskCreated * 1000).toLocaleString()}</p>
                     </div>
                 </div>
             `
