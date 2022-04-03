@@ -6,7 +6,7 @@ App = {
         await App.loadAccount()
         await App.loadContracts()
         App.render()
-        await App.renderTasks()
+        await App.renderInvestments()
     },
     loadEthereum: async () => {
         if (window.ethereum) {
@@ -26,64 +26,64 @@ App = {
         // console.log(balance)
     },
     loadContracts: async () => {
-        const res = await fetch("TasksContract.json")                       //Traigo el contrato en formato JSON
-        const tasksContractJSON = await res.json()                          //Traigo el contrato en formato JSON
+        const res = await fetch("InvestmentsContract.json")                       //Traigo el contrato en formato JSON
+        const investmentsContractJSON = await res.json()                          //Traigo el contrato en formato JSON
         
-        App.contracts.tasksContract = TruffleContract(tasksContractJSON)    // Convierto el JSON a Truffle
-        App.contracts.tasksContract.setProvider(App.web3Provider)           // Conectamos con MetaMask
-        App.tasksContract = await App.contracts.tasksContract.deployed()    // Usamos el contrato desplegado
+        App.contracts.investmentsContract = TruffleContract(investmentsContractJSON)    // Convierto el JSON a Truffle
+        App.contracts.investmentsContract.setProvider(App.web3Provider)           // Conectamos con MetaMask
+        App.investmentsContract = await App.contracts.investmentsContract.deployed()    // Usamos el contrato desplegado
     },
     render: () => {
         console.log(App.account)
         document.getElementById('account').innerText = App.account
         // document.getElementById('balance').innerHTML = App.balance
     },
-    renderTasks: async () => {
-        const taskCounter = await App.tasksContract.taskCounter()
-        const taskCounterNumber = taskCounter.toNumber()
-        // console.log(taskCounterNumber)
+    renderInvestments: async () => {
+        const investmentCounter = await App.investmentsContract.investmentCounter()
+        const investmentCounterNumber = investmentCounter.toNumber()
+        // console.log(investmentCounterNumber)
 
         let html = ''
 
-        for (let i = 1; i <= taskCounterNumber; i++) {
-            const task = await App.tasksContract.tasks(i)
-            const taskId = task[0]
-            const taskTitle = task[1]
-            const taskDescription = task[2]
-            const taskDone = task[3]
-            const taskCreated = task[4]
+        for (let i = 1; i <= investmentCounterNumber; i++) {
+            const investment = await App.investmentsContract.investments(i)
+            const investmentId = investment[0]
+            const investmentTitle = investment[1]
+            const investmentDescription = investment[2]
+            const investmentDone = investment[3]
+            const investmentCreated = investment[4]
 
-            let taskElement = `
+            let investmentElement = `
                 <div class="card bg-dark rounded-0 mb-2" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
                     <div class="card-header d-flex justify-content-between align-items-center">
-                        <span> ${taskTitle} </span>
+                        <span> ${investmentTitle} </span>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" data-id="${taskId}" type="checkbox" ${taskDone && "checked"} onchange="App.toggleDone(this)"/>
+                            <input class="form-check-input" data-id="${investmentId}" type="checkbox" ${investmentDone && "checked"} onchange="App.toggleDone(this)"/>
                         </div>
                     </div> 
                     <div class="card-body">
-                        <span> ${taskDescription} ETH </span>
-                        <p class="text-muted">Transaction was created ${new Date(taskCreated * 1000).toLocaleString()}</p>
+                        <span> Has realizado una inversión de ${investmentDescription} ETH. </span>
+                        <p class="text-muted">Transaction was created ${new Date(investmentCreated * 1000).toLocaleString()}</p>
                     </div>
                 </div>
             `
 
-            html += taskElement;
+            html += investmentElement;
         }
 
-        document.querySelector('#tasksList').innerHTML = html;
+        document.querySelector('#investmentsList').innerHTML = html;
     },
-    createTask: async (title, description) => {
-        const result = await App.tasksContract.createTask(title, description, { 
+    createInvestment: async (title, description) => {
+        const result = await App.investmentsContract.createInvestment(title, description, { 
             from: App.account
         })
         // console.log(result.logs[0].args)
         location.reload();
     },
     toggleDone: async (element) => {
-        const taskId = element.dataset.id
+        const investmentId = element.dataset.id
 
-        await App.tasksContract.toggleDone(taskId, {
+        await App.investmentsContract.toggleDone(investmentId, {
             from: App.account
         })
 

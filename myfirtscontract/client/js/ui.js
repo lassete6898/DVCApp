@@ -1,31 +1,56 @@
-const taskForm = document.querySelector("#taskForm");
+const investmentForm = document.querySelector("#investmentForm");
 
 document.addEventListener("DOMContentLoaded", () => {
-    App.init() 
-})
+  App.init();
+});
 
-taskForm.addEventListener("submit", e => {
-    e.preventDefault();
-    
-    var startup = document.getElementById("startupsSelect").value;
+investmentForm.addEventListener("submit", (e) => {
+  e.preventDefault();
 
-    if (startup == "") {
-        alert("Select a Startup")
-    } else {
-        // console.log(startup);
-        // console.log(taskForm["amount"].value);
-        App.createTask(startup, taskForm["amount"].value);
-        // App.createTask(taskForm["title"].value, taskForm["description"].value);
-    }
-})
+  var startup = document.getElementById("startupsSelect").value;
+
+  if (startup == "") {
+    alert("Select a Startup");
+  } else {
+    // console.log(startup);
+    // console.log(investmentForm["amount"].value);
+    App.createInvestment(startup, investmentForm["amount"].value);
+    // App.createInvestment(investmentForm["title"].value, investmentForm["description"].value);
+  }
+});
 
 function info() {
-    Swal.fire({
-        title: '<h1> Soluciones MedX </h1>',
-        icon: 'info',
-        html:
-          '<p align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem purus, rutrum ut ipsum eget, rhoncus finibus libero. Fusce eleifend varius suscipit. Nullam sit amet commodo ante. raesent vitae luctus mi, at faucibus arcu. </p>',
-        showCloseButton: true,
-        showConfirmButton: false
-      })
+  var startup = document.getElementById("startupsSelect").value;
+  Swal.fire({
+    title: "<h1>" + startup + "</h1>",
+    icon: "info",
+    html: '<p align="justify"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut sem purus, rutrum ut ipsum eget, rhoncus finibus libero. Fusce eleifend varius suscipit. Nullam sit amet commodo ante. raesent vitae luctus mi, at faucibus arcu. </p>',
+    showCloseButton: true,
+    showConfirmButton: false,
+  });
+}
+
+window.onload = function () {
+  getAccount();
+};
+
+async function testsito() {
+  await ethereum.request({
+    method: "eth_sendTransaction",
+    params: [
+      {
+        from: accounts[0],
+        to: "0xCF79BE0d8a782D6C88322Db56A6A54229E29EDc3",
+        value: "0x29a2241af62c0000",
+        gasPrice: "0x09184e72a000",
+        // gas: '0x2710',
+      },
+    ],
+  });
+}
+
+let accounts = [];
+
+async function getAccount() {
+  accounts = await ethereum.request({ method: "eth_requestAccounts" });
 }
