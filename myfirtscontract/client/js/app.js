@@ -58,6 +58,7 @@ App = {
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span> ${investmentTitle} </span>
                         <div class="form-check form-switch">
+                            <span> ¿Retirar inversión? </span>
                             <input class="form-check-input" data-id="${investmentId}" type="checkbox" ${investmentDone && "checked"} onchange="App.toggleDone(this)"/>
                         </div>
                     </div> 
