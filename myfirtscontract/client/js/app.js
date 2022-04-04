@@ -79,7 +79,7 @@ App = {
             from: App.account
         })
         // console.log(result.logs[0].args)
-        location.reload();
+        window.location.reload;
     },
     toggleDone: async (element) => {
         const investmentId = element.dataset.id
