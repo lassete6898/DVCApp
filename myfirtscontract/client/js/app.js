@@ -58,12 +58,12 @@ App = {
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span> ${investmentTitle} </span>
                         <div class="form-check form-switch">
-                            <span> ¿Retirar inversión? </span>
+                            <span> Withdraw investment? </span>
                             <input class="form-check-input" data-id="${investmentId}" type="checkbox" ${investmentDone && "checked"} onchange="App.toggleDone(this)"/>
                         </div>
                     </div> 
                     <div class="card-body">
-                        <span> Has realizado una inversión de ${investmentDescription} ETH. </span>
+                        <span> You have made an investment of ${investmentDescription} ETH. </span>
                         <p class="text-muted">Transaction was created ${new Date(investmentCreated * 1000).toLocaleString()}</p>
                     </div>
                 </div>
@@ -82,7 +82,8 @@ App = {
         window.location.reload;
     },
     toggleDone: async (element) => {
-        const investmentId = element.dataset.id
+        const investmentId = element.dataset.id;
+        // test();
 
         await App.investmentsContract.toggleDone(investmentId, {
             from: App.account

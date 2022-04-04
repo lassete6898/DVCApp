@@ -31,21 +31,24 @@
                     <div class="form-group">
                         <select class="form-control bg-dark text-white rounded border mt-4" id="startupsSelect" onchange="info()">
                             <option value="" disabled selected hidden> Select a Startup </option>
-                            <option value="Soluciones MedX"> Soluciones MedX </option>
-                            <option value="Arte Cuerdas"> Arte Cuerdas </option>
-                            <option value="Casa Platino"> Casa Platino </option>
-                            <option value="Desenfadado"> Desenfadado </option>
-                            <option value="Pequeñas Espinas"> Pequeñas Espinas </option>
+                            <option value="Connex"> Connex </option>
+                            <option value="Sooper"> Sooper </option>
+                            <option value="Lincer"> Lincer </option>
+                            <option value="Lotis"> Lotis </option>
+                            <option value="Veriphy"> Veriphy </option>
                         </select>
                     </div>
                     <input type="number" name="amount" id="amount" placeholder="Amount ETH" class="form-control bg-dark text-white rounded border my-4" min="0">
 
                     <!-- <input type="text" name="title" placeholder="Write a Startup" class="form-control bg-dark text-white rounded-0 border-0 my-4">
                     <textarea rows="2" name="description" class="form-control bg-dark text-white rounded-0 border-0 my-4" placeholder="Amount..."></textarea> -->
-                    <button class="btn btn-primary" onclick="testsito()"> Save </button>
+                    <button class="btn btn-primary" onclick="transaction()"> Save </button>
                 </form>
             </div>
             <div class="col-md-8">
+                <div class="card card-body rounded mb-4 bg-dark" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
+                    <h3> Investments </h3>
+                </div>
                 <div id ="investmentsList"></div> 
             </div>
         </div>

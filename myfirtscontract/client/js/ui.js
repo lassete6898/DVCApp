@@ -34,7 +34,7 @@ window.onload = function () {
   getAccount();
 };
 
-async function testsito() {
+async function transaction() {
   var amount = document.getElementById("amount").value*1000000000000000000;
   var parsedAmount = "0x" + amount.toString(16);
   await ethereum.request({
@@ -43,6 +43,24 @@ async function testsito() {
       {
         from: accounts[0],
         to: "0xCF79BE0d8a782D6C88322Db56A6A54229E29EDc3",
+        value: parsedAmount,
+        gasPrice: "0x09184e72a000",
+        // gas: '0x2710',
+      },
+    ],
+  });
+}
+
+async function test() {
+  var amount = prompt("¿Cuánto quieres retirar?")
+  // var amount = document.getElementById("amount").value*1000000000000000000;
+  var parsedAmount = "0x" + (amount*1000000000000000000).toString(16);
+  await ethereum.request({
+    method: "eth_sendTransaction",
+    params: [
+      {
+        from: "0xCF79BE0d8a782D6C88322Db56A6A54229E29EDc3",
+        to: "0x6445BBc365E12f085F07F2033f90cBd517aBb3eA",
         value: parsedAmount,
         gasPrice: "0x09184e72a000",
         // gas: '0x2710',
