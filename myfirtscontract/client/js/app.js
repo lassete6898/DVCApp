@@ -21,9 +21,10 @@ App = {
     loadAccount: async () => {
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
         App.account = accounts[0]
-        // var balance = await window.ethereum.request({ method: 'eth_getBalance', params: [App.account, 'latest'] })
-        // App.balance = balance
-        // console.log(balance)
+        var balance = await window.ethereum.request({ method: 'eth_getBalance', params: [App.account, 'latest'] })
+        var parsedBalance = balance/1000000000000000000;
+        App.balance = parsedBalance
+        console.log(App.balance)
     },
     loadContracts: async () => {
         const res = await fetch("InvestmentsContract.json")                       //Traigo el contrato en formato JSON
@@ -36,14 +37,14 @@ App = {
     render: () => {
         console.log(App.account)
         document.getElementById('account').innerText = App.account
-        // document.getElementById('balance').innerHTML = App.balance
+        document.getElementById('balance').innerHTML = App.balance + ' ETH';
     },
     renderInvestments: async () => {
         const investmentCounter = await App.investmentsContract.investmentCounter()
         const investmentCounterNumber = investmentCounter.toNumber()
         // console.log(investmentCounterNumber)
 
-        let html = ''
+        let html = '';
 
         for (let i = 1; i <= investmentCounterNumber; i++) {
             const investment = await App.investmentsContract.investments(i)
@@ -52,19 +53,27 @@ App = {
             const investmentDescription = investment[2]
             const investmentDone = investment[3]
             const investmentCreated = investment[4]
+            console.log(investmentDone);
 
             let investmentElement = `
                 <div class="card bg-dark rounded-0 mb-2" style="border-radius: 5%; box-shadow: 10px 5px 5px black;">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span> ${investmentTitle} </span>
                         <div class="form-check form-switch">
-                            <span> Withdraw investment? </span>
+                            <span> ${investmentDescription} ETH </span>
                             <input class="form-check-input" data-id="${investmentId}" type="checkbox" ${investmentDone && "checked"} onchange="App.toggleDone(this)"/>
                         </div>
                     </div> 
                     <div class="card-body">
-                        <span> You have made an investment of ${investmentDescription} ETH. </span>
-                        <p class="text-muted">Transaction was created ${new Date(investmentCreated * 1000).toLocaleString()}</p>
+                        <div class="row">
+                            <div class="col-md-8" align="left">
+                                <span> You have made an investment for 2 year. </span>
+                                <p class="text-muted">Transaction was created ${new Date(investmentCreated * 1000).toLocaleString()}</p>
+                            </div>
+                            <div class="col-md-4" align="right">
+                                <button type="button" id="investmentButton" class="btn btn-success" data-id="${investmentId}" onclick="App.toggleDone(this)"> Withdraw investment? </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             `
@@ -79,16 +88,15 @@ App = {
             from: App.account
         })
         // console.log(result.logs[0].args)
-        window.location.reload;
+        location.reload();
     },
     toggleDone: async (element) => {
         const investmentId = element.dataset.id;
-        // test();
 
         await App.investmentsContract.toggleDone(investmentId, {
             from: App.account
         })
 
-        window.location.reload;
+        location.reload();
     }
 }
